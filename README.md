@@ -274,3 +274,148 @@ function myFunc() {
 ```
 
 - Note that in HTML, event listener names are written in all lowercase, such as onclick or onmouseover. In JSX, event listener names are written in camelCase, such as onClick or onMouseOver.
+  
+---
+
+## JSX Conditionals: If Statements That Do Work
+
+```
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+let message;
+
+if (user.age >= drinkingAge) {
+  message = (
+    <h1>
+      Hey, check out this alcoholic beverage!
+    </h1>
+  );
+} else {
+  message = (
+    <h1>
+      Hey, check out these earrings I got at Claire's!
+    </h1>
+  );
+}
+
+ReactDOM.render(
+  message, 
+  document.getElementById('app')
+);
+```
+
+---
+## JSX Conditionals: The Ternary Operator
+
+```
+const headline = (
+  <h1>
+    { age >= drinkingAge ? 'Buy Drink' : 'Do Teen Stuff' }
+  </h1>
+);
+```
+
+- In the above example, if age is greater than or equal to drinkingAge, then headline will equal "h1" Buy Drink. Otherwise, headline will equal "h1" Do Teen Stuff.
+
+---
+## JSX Conditionals: &&
+
+- && works best in conditionals that will sometimes do an action, but other times do nothing at all.
+
+```
+const tasty = (
+  <ul>
+    <li>Applesauce</li>
+    { !baby && <li>Pizza</li> }
+    { age > 15 && <li>Brussels Sprouts</li> }
+    { age > 20 && <li>Oysters</li> }
+    { age > 25 && <li>Grappa</li> }
+  </ul>
+);
+```
+
+- If the expression **on the left of the && evaluates as true,** **then the JSX on the right of the && will be rendered**. If the first expression is false, however, then the JSX to the right of the && will be ignored and not rendered.
+
+---
+
+## .map in JSX
+
+- The array method .map() comes up often in React. It’s good to get in the habit of using it alongside JSX.
+
+- If you want to create a list of JSX elements, then .map() is often your best bet. It can look odd at first:
+
+```
+const strings = ['Home', 'Shop', 'About Me'];
+ 
+const listItems = strings.map(string => <li>{string}</li>);
+ 
+<ul>{listItems}</ul>
+
+```
+- In the above example, we start out with an array of strings. We call .map() on this array of strings, and the .map() call returns a new array of "li"s.
+
+---
+
+## Keys
+
+- A key is a JSX attribute. The attribute’s name is key. The attribute’s value should be something unique, similar to an id attribute.
+
+- keys don’t do anything that you can see! React uses them internally to keep track of lists. If you don’t use keys when you’re supposed to, React might accidentally scramble your list-items into the wrong order.
+  
+- Not all lists need to have keys. A list needs keys if either of the following are true:
+
+   1. The list-items have memory from one render to the next. For instance, when a to-do list renders, each item must “remember” whether it was checked off. The items shouldn’t get amnesia when they render.
+
+   2. A list’s order might be shuffled. For instance, a list of search results might be shuffled from one render to the next.
+   
+- If neither of these conditions are true, then you don’t have to worry about keys. If you aren’t sure then it never hurts to use them!
+
+  
+```
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+const people = ['Rowe', 'Prevost', 'Gare'];
+
+
+//unique is i,(index)
+const peopleLis = people.map((person,i) =>
+
+  // expression goes here:
+  <li key={'person_' + i}>{person}</li>
+
+);
+
+// ReactDOM.render goes here:
+ReactDOM.render(<ul>{peopleLis}</ul>,
+document.getElementById('app'));
+
+```
+
+---
+
+## [React.createElement](https://reactjs.org/docs/react-api.html)
+- The majority of React programmers do use JSX, and we will use it for the remainder of this tutorial, but you should understand that it is possible to write React code without it.
+
+- The following JSX expression: 
+
+```
+const h1 = <h1>Hello world</h1>;
+```
+
+- can be rewritten without JSX, like this:
+
+```
+const h1 = React.createElement(
+  "h1",
+  null,
+  "Hello world"
+);
+```
+
+- When a JSX element is compiled, the compiler transforms the JSX element into the method that you see above: React.createElement(). Every JSX element is secretly a call to React.createElement().
+
+--- 
+## What’s a difference between a DOM object and a virtual DOM object?
+  ![](images/difference.png)
