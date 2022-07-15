@@ -45,6 +45,9 @@ export const alsoRan = 'TimeCube';
 ---
 
 ## this.props (object)
+
+- props are READ only, but can  not change the value 
+  
 - a component can pass information to another component.
 
 - Information that gets passed from one component to another is known as “props.”

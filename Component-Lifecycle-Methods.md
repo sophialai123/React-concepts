@@ -102,10 +102,18 @@ When a component updates, it calls [several methods](https://reactjs.org/docs/re
  
 2. The second is componentDidUpdate(). Just like componentDidMount() is a good place for mount-phase setup, componentDidUpdate() is a good place for update-phase work.
 
+---
 
-```
-```
-```
-```
-```
-```
+## Review
+
+1. Mounting, when the component is being initialized and put into the DOM for the first time. We saw that the constructor, render(), and componentDidMount() are called during this phase.
+   
+2. Updating, when the component updates as a result of changed state or changed props. We saw that render() and componentDidUpdate() are called during this phase.
+
+3. Unmounting, when the component is being removed from the DOM. We saw that componentWillUnmount() was called here, which was a good time to clean things up.
+
+
+4. For more, read React’s official documentation. See [“State and Lifecycle”](https://reactjs.org/docs/state-and-lifecycle.html) and the docs for [React.Component](https://reactjs.org/docs/react-component.html).
+
+ ![](images/lifecyclemethods.png)
+
